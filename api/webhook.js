@@ -135,8 +135,31 @@ export default async function handler(req, res) {
     const text   = message.text.trim();
     const name   = message.from?.first_name ?? 'Користувач';
 
-    // /start
+    // /start (with optional deep link param)
     if (text.startsWith('/start')) {
+        const param = text.split(' ')[1]; // e.g. /start program
+
+        if (param === 'program') {
+            const list = PROGRAM.map((t, i) => `${String(i + 1).padStart(2, '0')}. ${t}`).join('\n');
+            await send(chatId,
+                `📋 *Програма курсу — 31 модуль:*\n\n${list}\n\n` +
+                `Щоб записатися або задати питання — оберіть нижче 👇`,
+                { reply_markup: mainMenu() }
+            );
+            return res.status(200).end();
+        }
+
+        if (param === 'lessons') {
+            const lessonsText = FREE_LESSONS.map(l => `*${l.n}.* [${l.title}](${l.url})`).join('\n');
+            await send(chatId,
+                `🎬 *Перші 4 безкоштовні уроки курсу:*\n\n${lessonsText}\n\n` +
+                `Якщо виникнуть питання — натисніть кнопку нижче 👇`,
+                { reply_markup: mainMenu() }
+            );
+            return res.status(200).end();
+        }
+
+        // Default /start — welcome message
         await send(chatId,
             `👋 *Привіт, ${name}!*\n\n` +
             `Вітаємо в боті *Школи психологічного консультування* — авторського 6-місячного курсу ` +
