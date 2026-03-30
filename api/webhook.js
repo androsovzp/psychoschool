@@ -181,20 +181,18 @@ export default async function handler(req, res) {
         return res.status(200).end();
     }
 
-    // /reply <chat_id> <text> — тільки з адмін-групи
-    if (text.startsWith('/reply') && String(chatId) === String(ADMIN_CHAT_ID)) {
-        const parts  = text.split(' ');
-        const target = parts[1];
-        const reply  = parts.slice(2).join(' ');
+    // Відповідь адміна через reply на повідомлення бота в групі
+    if (String(chatId) === String(ADMIN_CHAT_ID) && message.reply_to_message) {
+        const replyTo = message.reply_to_message;
+        const match   = replyTo.text?.match(/🆔\s*`?(-?\d+)`?/);
+        const target  = match?.[1];
 
-        if (!target || !reply) {
-            await send(chatId, 'Формат: `/reply <chat_id> <повідомлення>`');
-        } else {
+        if (target) {
             await send(target,
-                `💬 *Відповідь тренера:*\n\n${esc(reply)}`,
+                `💬 *Відповідь тренера:*\n\n${esc(text)}`,
                 { reply_markup: mainMenu() }
             );
-            await send(chatId, `✅ Відповідь надіслано користувачу \`${target}\``);
+            await send(chatId, `✅ Надіслано`);
         }
         return res.status(200).end();
     }
@@ -206,8 +204,7 @@ export default async function handler(req, res) {
             `📩 *Повідомлення від користувача*\n\n` +
             `👤 ${esc(name)} (${username})\n` +
             `🆔 \`${chatId}\`\n\n` +
-            `💬 ${esc(text)}\n\n` +
-            `_Відповісти: /reply ${chatId} ваш текст_`;
+            `💬 ${esc(text)}`;
         await send(ADMIN_CHAT_ID, forwardText);
 
         await send(chatId,
