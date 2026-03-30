@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Школа психологічного консультування | Авторський курс</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            scroll-behavior: smooth;
+        }
+
+        .bg-yellow-brand {
+            background-color: #FFEF00;
+        }
+
+        .text-yellow-brand {
+            color: #FFEF00;
+        }
+
+        .border-yellow-brand {
+            border-color: #FFEF00;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at top right, #FFEF00 0%, transparent 40%),
+                radial-gradient(circle at bottom left, #f3f4f6 0%, transparent 40%);
+        }
+
+        .ai-glow {
+            box-shadow: 0 0 30px rgba(255, 239, 0, 0.3);
+        }
+
+        .btn-hover {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1a1a1a;
+            border-radius: 10px;
+        }
+
+        /* Mobile menu transition */
+        #mobile-menu {
+            transition: max-height 0.32s ease-in-out;
+        }
+
+        /* Menu bar animation */
+        .menu-bar {
+            transition: transform 0.28s ease, opacity 0.2s ease;
+        }
+
+        /* FAQ accordion */
+        .faq-body {
+            transition: max-height 0.32s ease-in-out;
+        }
+
+        /* Certificate hover */
+        .cert-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+    </style>
+</head>
+
+<body class="overflow-x-hidden">
+
+    <!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
+    <header class="fixed w-full z-50 py-4 px-6 md:px-12 glass-card">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M20 30C20 18.9543 28.9543 10 40 10H80V30H40C34.4772 30 30 34.4772 30 40V70C30 75.5228 34.4772 80 40 80H70V100H40C28.9543 100 20 91.0457 20 80V30Z"
+                        fill="#FFEF00" />
+                    <rect x="50" y="35" width="40" height="8" rx="4" fill="#1a1a1a" />
+                    <rect x="50" y="55" width="25" height="8" rx="4" fill="#1a1a1a" />
+                    <path d="M75 10V40M60 25H90" stroke="#1a1a1a" stroke-width="8" stroke-linecap="round" />
+                </svg>
+                <div class="hidden sm:block leading-tight font-bold text-sm">
+                    ШКОЛА<br>ПСИХОЛОГІЧНОГО<br>КОНСУЛЬТУВАННЯ
+                </div>
+            </div>
+
+            <!-- Desktop nav -->
+            <nav class="hidden md:flex gap-8 font-semibold text-sm uppercase tracking-wider">
+                <a href="#author" class="hover:text-yellow-500 transition-colors">Про автора</a>
+                <a href="#about" class="hover:text-yellow-500 transition-colors">Про курс</a>
+                <a href="#ai" class="hover:text-yellow-500 transition-colors">ШІ-Агент</a>
+                <a href="#program" class="hover:text-yellow-500 transition-colors">Програма</a>
+                <a href="#price" class="hover:text-yellow-500 transition-colors">Вартість</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <a href="#register"
+                    class="bg-black text-white px-6 py-2 rounded-full text-sm font-bold btn-hover hidden sm:inline-block">Зареєструватися</a>
+
+                <!-- Hamburger (mobile only) -->
+                <button id="menu-btn" aria-label="Відкрити меню" aria-expanded="false"
+                    class="md:hidden flex flex-col justify-center items-center gap-[5px] w-10 h-10 p-1.5 rounded-xl hover:bg-gray-100 transition-colors">
+                    <span class="menu-bar block h-0.5 w-6 bg-black"></span>
+                    <span class="menu-bar block h-0.5 w-6 bg-black"></span>
+                    <span class="menu-bar block h-0.5 w-6 bg-black"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile nav dropdown -->
+    <nav id="mobile-menu" class="md:hidden fixed top-[72px] left-0 right-0 z-40 bg-white/97 backdrop-blur-md
+                border-b border-gray-100 shadow-lg max-h-0 overflow-hidden">
+        <div class="flex flex-col py-2 px-6">
+            <a href="#author"
+                class="mobile-link py-4 font-semibold text-sm uppercase tracking-wider border-b border-gray-100">Про
+                автора</a>
+            <a href="#about"
+                class="mobile-link py-4 font-semibold text-sm uppercase tracking-wider border-b border-gray-100">Про
+                курс</a>
+            <a href="#ai"
+                class="mobile-link py-4 font-semibold text-sm uppercase tracking-wider border-b border-gray-100">ШІ-Агент</a>
+            <a href="#program"
+                class="mobile-link py-4 font-semibold text-sm uppercase tracking-wider border-b border-gray-100">Програма</a>
+            <a href="#price"
+                class="mobile-link py-4 font-semibold text-sm uppercase tracking-wider border-b border-gray-100">Вартість</a>
+            <a href="#register"
+                class="mobile-link my-4 bg-black text-white text-center py-3.5 rounded-2xl font-bold text-sm">Зареєструватися</a>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+    <section class="min-h-screen hero-gradient flex flex-col justify-center pt-24 pb-12 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div class="order-2 md:order-1">
+                <div
+                    class="inline-block bg-black text-white px-4 py-1 rounded-full text-xs font-bold mb-6 tracking-widest uppercase">
+                    Авторський курс • 6 місяців інтенсиву
+                </div>
+                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-8">
+                    Від теорії до <span class="bg-yellow-brand px-2">впевненої</span> приватної практики
+                </h1>
+                <p class="text-lg md:text-xl text-gray-600 mb-10 max-w-lg">
+                    Опануйте головні методи та інструменти психологічного консультування з використанням інноваційного
+                    ШІ-тренажера для відпрацювання реальних кейсів.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#register"
+                        class="bg-yellow-brand text-black px-10 py-4 rounded-2xl font-bold text-lg text-center btn-hover">Почати
+                        навчання</a>
+                    <a href="#program"
+                        class="border-2 border-black text-black px-10 py-4 rounded-2xl font-bold text-lg text-center hover:bg-black hover:text-white transition-all">Дивитися
+                        програму</a>
+                </div>
+            </div>
+
+            <div class="order-1 md:order-2 relative">
+                <div class="w-full aspect-square rounded-[3rem] overflow-hidden relative ai-glow">
+                    <img src="hero.png" alt="Школа психологічного консультування" class="w-full h-full object-cover object-center">
+                </div>
+                <!-- Floating badge -->
+                <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-3xl shadow-2xl max-w-[200px]">
+                    <div class="text-3xl font-bold mb-1">144</div>
+                    <div class="text-sm text-gray-500 font-medium">години глибокого занурення у практику</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════ VIDEO INTRO ═══════════════════════════════ -->
+    <section class="py-20 px-6 md:px-12 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-10">
+                <div class="inline-block bg-black text-white px-4 py-1 rounded-full text-xs font-bold mb-4 tracking-widest uppercase">Відеозапрошення</div>
+                <h2 class="text-3xl md:text-4xl font-extrabold leading-tight">Дізнайтеся більше про курс<br>за 3 хвилини</h2>
+            </div>
+            <div class="relative w-full rounded-[2rem] overflow-hidden shadow-2xl" style="padding-top: 56.25%;">
+                <iframe
+                    src="https://www.youtube-nocookie.com/embed/ma8xzgUTcSM?rel=0&modestbranding=1"
+                    title="Відеозапрошення на курс"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    class="absolute inset-0 w-full h-full border-0">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════ STATS / ABOUT ═══════════════════════════════ -->
+    <section id="about" class="py-24 px-6 md:px-12 bg-black text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-12 text-center">
+                <div class="p-8 border-r border-white/10 last:border-0">
+                    <div class="text-yellow-brand text-5xl font-bold mb-4">24/7</div>
+                    <p class="text-gray-400">Підтримка та практика в ШІ-тренажері</p>
+                </div>
+                <div class="p-8 border-r border-white/10 last:border-0">
+                    <div class="text-yellow-brand text-5xl font-bold mb-4">2</div>
+                    <p class="text-gray-400">Заняття на тиждень по 2 години</p>
+                </div>
+                <div class="p-8">
+                    <div class="text-yellow-brand text-5xl font-bold mb-4">31</div>
+                    <p class="text-gray-400">Ключова тема — від перших хвилин до РХП та ПТСР</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════ AUTHOR ═══════════════════════════════ -->
+    <section id="author" class="py-24 px-6 md:px-12 bg-white">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <!-- Photo with decorative accent -->
+            <div class="relative flex justify-center md:justify-start">
+                <div class="relative w-full max-w-sm md:max-w-none">
+                    <div class="rounded-[3rem] overflow-hidden aspect-[4/5] bg-gray-100">
+                        <img src="photo.jpg" alt="Автор курсу" class="w-full h-full object-cover object-top">
+                    </div>
+                    <!-- Yellow decorative block -->
+                    <div class="absolute -bottom-4 -right-4 w-full h-full bg-yellow-brand rounded-[3rem] -z-10"></div>
+                </div>
+            </div>
+
+            <!-- Bio -->
+            <div>
+                <div
+                    class="bg-black text-white inline-block px-4 py-1 rounded-full text-xs font-bold mb-6 tracking-widest uppercase">
+                    Про автора
+                </div>
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
+                    <!-- ЗАМІНІТЬ НА СВОЄ ІМ'Я -->
+                    Валерій Андросов
+                </h2>
+                <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                    <!-- ЗАМІНІТЬ НА СВІЙ ТЕКСТ БІО (2–3 речення) -->
+                    Психолог-консультант із 10-річним досвідом приватної практики. Спеціалізуюся на
+                    когнітивно-поведінковій психології та роботі з тривожними й депресивними розладами, та сімейними
+                    парами. Мета цього курсу — передати вам не просто знання, а живу практику, яка дійсно працює з
+                    реальними людьми.
+                </p>
+                <!-- Credential chips — відредагуйте під свої дані -->
+                <div class="flex flex-wrap gap-3">
+                    <span class="bg-yellow-brand px-4 py-2 rounded-full text-sm font-bold">Сертифікований
+                        психолог</span>
+                    <span class="bg-gray-100 px-4 py-2 rounded-full text-sm font-semibold">Інтегративний підхід</span>
+                    <span class="bg-gray-100 px-4 py-2 rounded-full text-sm font-semibold">10 років практики</span>
+                    <span class="bg-gray-100 px-4 py-2 rounded-full text-sm font-semibold">PhD у навчанні</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════ CERTIFICATES ═══════════════════════════════ -->
+    <section id="certificates" class="py-16 px-6 md:px-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h3 class="text-2xl font-extrabold uppercase tracking-wider mb-2">Підтверджена кваліфікація</h3>
+                <p class="text-gray-500">Натисніть на сертифікат, щоб переглянути повністю</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+                <div class="cert-card bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm cursor-pointer"
+                    onclick="openCert('Certificate-1.png', 'Сертифікат про успішне навчання і проходження сертифікації')">
+                    <div class="overflow-hidden bg-gray-50">
+                        <img src="Certificate-1.png" alt="Сертифікат про сертифікацію"
+                            class="w-full object-cover hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-5 text-center">
+                        <p class="font-semibold text-sm text-gray-700">Сертифікат про успішне навчання</p>
+                        <p class="text-xs text-gray-400 mt-1">та проходження сертифікації</p>
+                    </div>
+                </div>
+                <div class="cert-card bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm cursor-pointer"
+                    onclick="openCert('Certificate-2.png', 'Сертифікат про прослуховування')">
+                    <div class="overflow-hidden bg-gray-50">
+                        <img src="Certificate-2.png" alt="Сертифікат про прослуховування"
+                            class="w-full object-cover hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-5 text-center">
+                        <p class="font-semibold text-sm text-gray-700">Сертифікат про прослуховування</p>
+                        <p class="text-xs text-gray-400 mt-1">підтвердження навчання</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox overlay (hidden) -->
+    <div id="cert-lightbox"
+        class="hidden fixed inset-0 z-[200] bg-black/90 flex items-center justify-center p-4 cursor-zoom-out">
+        <div class="relative max-w-2xl w-full">
+            <img id="cert-lightbox-img" src="" alt="" class="w-full rounded-2xl shadow-2xl">
+            <p id="cert-lightbox-caption" class="text-white text-center mt-4 font-semibold text-sm opacity-80"></p>
+            <button onclick="closeCert()"
+                class="absolute -top-4 -right-4 bg-white text-black w-10 h-10 rounded-full font-black text-xl flex items-center justify-center shadow-lg hover:bg-yellow-brand transition-colors">×</button>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════ AI AGENT ═══════════════════════════════ -->
+    <section id="ai" class="py-24 px-6 md:px-12 overflow-hidden bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="bg-gray-50 rounded-[3rem] p-8 md:p-16 border border-gray-100 relative overflow-hidden">
+                <div
+                    class="absolute top-0 right-0 w-64 h-64 bg-yellow-brand/20 blur-[100px] rounded-full pointer-events-none">
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-16 items-center relative z-10">
+                    <div>
+                        <div
+                            class="bg-yellow-brand inline-block px-4 py-1 rounded-lg text-xs font-black uppercase tracking-tighter mb-4">
+                            Технологія 2026</div>
+                        <h2 class="text-4xl md:text-5xl font-extrabold mb-8 leading-tight">Персональний ШІ-агент для
+                            відпрацювання кейсів</h2>
+                        <ul class="space-y-6">
+                            <li class="flex gap-4">
+                                <div
+                                    class="bg-black text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0 font-bold">
+                                    1</div>
+                                <div>
+                                    <h4 class="font-bold text-lg">Будь-яка роль</h4>
+                                    <p class="text-gray-600">ШІ може бути як вашим супервізором, так і складним клієнтом
+                                        з будь-яким запитом.</p>
+                                </div>
+                            </li>
+                            <li class="flex gap-4">
+                                <div
+                                    class="bg-black text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0 font-bold">
+                                    2</div>
+                                <div>
+                                    <h4 class="font-bold text-lg">Реалістичні сценарії</h4>
+                                    <p class="text-gray-600">Агент натренований на тисячах годин реальних консультацій
+                                        та матеріалах курсу.</p>
+                                </div>
+                            </li>
+                            <li class="flex gap-4">
+                                <div
+                                    class="bg-black text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0 font-bold">
+                                    3</div>
+                                <div>
+                                    <h4 class="font-bold text-lg">Миттєвий фідбек</h4>
+                                    <p class="text-gray-600">Отримуйте аналіз ваших відповідей: чи не порушили ви етику,
+                                        чи вірно застосували техніку.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-black rounded-3xl p-6 text-white font-mono text-sm shadow-2xl">
+                        <div class="flex gap-2 mb-6">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="space-y-4">
+                            <p class="text-yellow-brand">// AI Client Initialized</p>
+                            <p class="text-gray-400">Клієнт: "Мені важко говорити... Я відчуваю, що застряг у цьому
+                                стані вже місяць."</p>
+                            <div class="border-l-2 border-yellow-brand pl-4 py-2">
+                                <p class="text-white italic">Ваша відповідь: "Я бачу, як вам непросто. Розкажіть, будь
+                                    ласка, більше про це 'застряг'?"</p>
+                            </div>
+                            <p class="text-green-400">Агент-Аналітик: Ви використали техніку активного слухання
+                                (валідація почуттів). Це допомогло клієнту відкритися.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════ PROGRAM ═══════════════════════════════ -->
+    <section id="program" class="py-24 px-6 md:px-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Навчальний план</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto text-lg">Ми пройдемо шлях від основ комунікації до роботи зі
+                    складними розладами.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-x-16 gap-y-0" id="program-grid"></div>
+
+            <!-- PDF Download -->
+            <div class="text-center mt-14">
+                <a href="план.pdf" download
+                    class="inline-flex items-center gap-3 bg-black text-white px-10 py-4 rounded-2xl font-bold text-lg btn-hover">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 shrink-0" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    Завантажити програму (PDF)
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════ PRICING ═══════════════════════════════ -->
+    <section id="price" class="py-24 px-6 md:px-12 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Вартість</h2>
+                <p class="text-gray-500 text-lg">Оберіть зручний варіант оплати</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 items-stretch max-w-4xl mx-auto">
+                <!-- Full payment -->
+                <div class="bg-white border-4 border-black p-10 rounded-[2.5rem] flex flex-col">
+                    <div class="mb-auto">
+                        <h3 class="text-2xl font-bold mb-4 italic">Повна оплата</h3>
+                        <div class="text-5xl font-black mb-2">25.000 <span class="text-xl font-bold">грн</span></div>
+                        <div
+                            class="inline-block bg-yellow-brand text-black text-xs font-black px-3 py-1 rounded-full mb-6">
+                            Економія 5.000 грн</div>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-center gap-2"><span class="text-green-600 font-bold">✓</span> Повний
+                                доступ до всіх матеріалів</li>
+                            <li class="flex items-center gap-2"><span class="text-green-600 font-bold">✓</span> Довічний
+                                доступ до ШІ-агента</li>
+                            <li class="flex items-center gap-2"><span class="text-green-600 font-bold">✓</span>
+                                Пріоритетна перевірка робіт</li>
+                            <li class="flex items-center gap-2"><span class="text-green-600 font-bold">✓</span>
+                                Сертифікат після завершення</li>
+                        </ul>
+                    </div>
+                    <a href="#register"
+                        class="w-full py-4 bg-yellow-brand text-black font-extrabold rounded-2xl text-center btn-hover">Обрати
+                        цей варіант</a>
+                </div>
+
+                <!-- Installments -->
+                <div class="bg-black text-white p-10 rounded-[2.5rem] flex flex-col relative overflow-hidden">
+                    <div class="mb-auto">
+                        <h3 class="text-2xl font-bold mb-4 italic">Оплата частинами</h3>
+                        <div class="text-5xl font-black mb-2">5.000 <span class="text-xl font-bold">грн / міс</span>
+                        </div>
+                        <p class="text-gray-400 mb-6 font-semibold">Разом: 30.000 грн</p>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-center gap-2 text-gray-300"><span
+                                    class="text-green-400 font-bold">✓</span> Розбиття до 6 частин</li>
+                            <li class="flex items-center gap-2 text-gray-300"><span
+                                    class="text-green-400 font-bold">✓</span> Жодних переплат з monobank</li>
+                            <li class="flex items-center gap-2 text-gray-300"><span
+                                    class="text-green-400 font-bold">✓</span> Доступ до занять поступово</li>
+                            <li class="flex items-center gap-2 text-gray-300"><span
+                                    class="text-green-400 font-bold">✓</span> Сертифікат після завершення</li>
+                        </ul>
+                    </div>
+                    <a href="#register"
+                        class="w-full py-4 bg-white text-black font-extrabold rounded-2xl text-center btn-hover">Оформити
+                        розстрочку</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════ FAQ ═══════════════════════════════ -->
+    <section id="faq" class="py-24 px-6 md:px-12 bg-gray-50">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Часті запитання</h2>
+                <p class="text-gray-500 text-lg">Відповіді на найпоширеніші питання</p>
+            </div>
+
+            <div class="space-y-3" id="faq-list">
+
+                <div
+                    class="faq-item bg-white border-2 border-gray-100 rounded-2xl overflow-hidden hover:border-black transition-colors">
+                    <button
+                        class="faq-trigger w-full flex justify-between items-center p-6 text-left font-bold text-base md:text-lg"
+                        aria-expanded="false">
+                        <span>Чи потрібна базова психологічна освіта для вступу?</span>
+                        <span
+                            class="faq-icon text-2xl font-black shrink-0 ml-4 transition-transform duration-300">+</span>
+                    </button>
+                    <div class="faq-body max-h-0 overflow-hidden">
+                        <p class="px-6 pb-6 text-gray-600 leading-relaxed">Ні. Курс розроблений так, щоб бути зрозумілим
+                            для початківців. Достатньо бажання та базового інтересу до психології. Ми починаємо з самих
+                            основ — від першого контакту з клієнтом до складних розладів.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="faq-item bg-white border-2 border-gray-100 rounded-2xl overflow-hidden hover:border-black transition-colors">
+                    <button
+                        class="faq-trigger w-full flex justify-between items-center p-6 text-left font-bold text-base md:text-lg"
+                        aria-expanded="false">
+                        <span>Як проходять заняття — онлайн чи офлайн?</span>
+                        <span
+                            class="faq-icon text-2xl font-black shrink-0 ml-4 transition-transform duration-300">+</span>
+                    </button>
+                    <div class="faq-body max-h-0 overflow-hidden">
+                        <p class="px-6 pb-6 text-gray-600 leading-relaxed">Повністю онлайн. Два живі заняття на тиждень
+                            у Zoom по 2 години кожне. Усі заняття записуються — ви матимете повний доступ до архіву та
+                            зможете переглядати у зручний час. Також є закрита спільнота для учасників.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="faq-item bg-white border-2 border-gray-100 rounded-2xl overflow-hidden hover:border-black transition-colors">
+                    <button
+                        class="faq-trigger w-full flex justify-between items-center p-6 text-left font-bold text-base md:text-lg"
+                        aria-expanded="false">
+                        <span>Що таке ШІ-агент і навіщо він мені?</span>
+                        <span
+                            class="faq-icon text-2xl font-black shrink-0 ml-4 transition-transform duration-300">+</span>
+                    </button>
+                    <div class="faq-body max-h-0 overflow-hidden">
+                        <p class="px-6 pb-6 text-gray-600 leading-relaxed">ШІ-агент — це ваш персональний тренажер для
+                            відпрацювання реальних консультацій у безпечному середовищі. Він може грати роль клієнта з
+                            будь-яким запитом або виступати супервізором. Доступний 24/7, не втомлюється і дає миттєвий
+                            фідбек — ідеально для формування впевненості перед реальною практикою.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="faq-item bg-white border-2 border-gray-100 rounded-2xl overflow-hidden hover:border-black transition-colors">
+                    <button
+                        class="faq-trigger w-full flex justify-between items-center p-6 text-left font-bold text-base md:text-lg"
+                        aria-expanded="false">
+                        <span>Чи видається документ про закінчення курсу?</span>
+                        <span
+                            class="faq-icon text-2xl font-black shrink-0 ml-4 transition-transform duration-300">+</span>
+                    </button>
+                    <div class="faq-body max-h-0 overflow-hidden">
+                        <p class="px-6 pb-6 text-gray-600 leading-relaxed">Так. Після успішного проходження всіх модулів
+                            і здачі підсумкових робіт ви отримуєте сертифікат про закінчення курсу встановленого зразка.
+                            Він підтверджує ваш рівень знань і може слугувати додатковим аргументом для клієнтів.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="faq-item bg-white border-2 border-gray-100 rounded-2xl overflow-hidden hover:border-black transition-colors">
+                    <button
+                        class="faq-trigger w-full flex justify-between items-center p-6 text-left font-bold text-base md:text-lg"
+                        aria-expanded="false">
+                        <span>Чи можна буде одразу брати клієнтів після курсу?</span>
+                        <span
+                            class="faq-icon text-2xl font-black shrink-0 ml-4 transition-transform duration-300">+</span>
+                    </button>
+                    <div class="faq-body max-h-0 overflow-hidden">
+                        <p class="px-6 pb-6 text-gray-600 leading-relaxed">Так. Програма побудована так, що вже до 4–5
+                            місяця навчання у вас є відпрацьовані кейси, розуміння етики та сотні годин практики з
+                            ШІ-тренажером. Чимало учасників починають приватну практику ще під час навчання.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="faq-item bg-white border-2 border-gray-100 rounded-2xl overflow-hidden hover:border-black transition-colors">
+                    <button
+                        class="faq-trigger w-full flex justify-between items-center p-6 text-left font-bold text-base md:text-lg"
+                        aria-expanded="false">
+                        <span>Що якщо я пропущу заняття?</span>
+                        <span
+                            class="faq-icon text-2xl font-black shrink-0 ml-4 transition-transform duration-300">+</span>
+                    </button>
+                    <div class="faq-body max-h-0 overflow-hidden">
+                        <p class="px-6 pb-6 text-gray-600 leading-relaxed">Усі заняття записуються. Ви отримуєте доступ
+                            до повного архіву і можете надолужити у зручний час. Куратор допоможе не загубити темп і
+                            відповість на питання в закритому чаті.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════ REGISTER ═══════════════════════════════ -->
+    <section id="register" class="py-24 px-6 md:px-12 bg-white relative">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold mb-4">Бронюйте місце в групі</h2>
+                <p class="text-gray-500">Ми зв'яжемося з вами для узгодження деталей та перевірки навичок.</p>
+            </div>
+
+            <form id="lead-form" class="space-y-6" novalidate>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-bold uppercase mb-2">Ім'я</label>
+                        <input name="name" type="text" placeholder="Ваше ім'я" required
+                            class="w-full p-4 border-2 border-black rounded-2xl focus:bg-yellow-brand/5 outline-none transition-all text-base">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold uppercase mb-2">Телефон</label>
+                        <input name="phone" type="tel" placeholder="+380" required
+                            class="w-full p-4 border-2 border-black rounded-2xl focus:bg-yellow-brand/5 outline-none transition-all text-base">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold uppercase mb-2">Нік у Telegram</label>
+                    <input name="telegram" type="text" placeholder="@your_handle" required
+                        class="w-full p-4 border-2 border-black rounded-2xl focus:bg-yellow-brand/5 outline-none transition-all text-base">
+                </div>
+                <button id="submit-btn" type="submit"
+                    class="w-full py-5 bg-black text-white text-xl font-black rounded-[2rem] btn-hover shadow-xl disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none">
+                    ВІДПРАВИТИ ЗАЯВКУ
+                </button>
+                <p id="form-error" class="hidden text-red-600 text-sm font-semibold text-center"></p>
+            </form>
+
+            <!-- Success Modal -->
+            <div id="success-message"
+                class="hidden fixed inset-0 flex items-center justify-center z-[100] bg-black/80 backdrop-blur-md">
+                <div class="bg-yellow-brand p-10 rounded-[3rem] text-center max-w-sm mx-4">
+                    <div class="text-6xl mb-4">🚀</div>
+                    <h3 class="text-3xl font-black mb-3">Дякуємо!</h3>
+                    <p class="font-semibold mb-6">Заявка прийнята. Поки очікуєте — перейдіть у наш бот: отримайте перші 4 уроки та задайте питання тренеру.</p>
+                    <div class="flex flex-col gap-3">
+                        <a href="https://t.me/psy_school_ua_bot" target="_blank"
+                           class="bg-black text-white px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition-colors">
+                            Перейти до бота →
+                        </a>
+                        <button onclick="document.getElementById('success-message').classList.add('hidden')"
+                            class="bg-white/60 text-black px-8 py-3 rounded-full font-bold hover:bg-white transition-colors text-sm">
+                            Закрити
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+    <footer class="py-12 px-6 md:px-12 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="flex items-center gap-3 opacity-50">
+                <svg width="30" height="30" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M20 30C20 18.9543 28.9543 10 40 10H80V30H40C34.4772 30 30 34.4772 30 40V70C30 75.5228 34.4772 80 40 80H70V100H40C28.9543 100 20 91.0457 20 80V30Z"
+                        fill="#1a1a1a" />
+                </svg>
+                <div class="text-xs font-bold uppercase tracking-widest">© 2026 ШПК. Усі права захищені.</div>
+            </div>
+            <div class="flex gap-6 text-sm font-bold uppercase">
+                <a href="/privacy.html" class="hover:underline">Політика приватності</a>
+                <a href="/offer.html" class="hover:underline">Договір оферти</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════════════ SCRIPTS ═══════════════════════════════ -->
+    <script>
+        // ─── Program grid ───────────────────────────────────────────────────
+        const topics = [
+            "Підлаштування під клієнта. Підтримуюче та активне слухання",
+            "Перші 5 хвилин консультації: Психологічний контракт",
+            "Питання, які виявляють сфери роботи",
+            "Невербальні реакції клієнта",
+            "Додаткова інформація про клієнта: вік, ролі, типи",
+            "Рівні розвитку особистості",
+            "Ієрархія когнітивних механізмів, АВС-аналіз",
+            "«Кодекс невротика», стратегії обробки інформації",
+            "Другий план, саморефлексія",
+            "Теорія установок. Дезадаптивні установки",
+            "Розлади особистості: Кластери А, В та С",
+            "Умови поставлення якісного результату",
+            "Сократівські питання",
+            "Основи коучінгової роботи",
+            "Рівні роботи та показання",
+            "Когнітивні помилки та їх корекція",
+            "Корекція установок",
+            "Сугестивні речення та метафори",
+            "Вправи та домашні завдання",
+            "Консультування депресивного розладу",
+            "Консультування тривожного розладу та панічних атак",
+            "Консультування ОКР",
+            "Консультування ПТСР",
+            "Консультування розладів харчової поведінки",
+            "Консультування осіб із залежностями",
+            "Консультування із приводу горя та втрати",
+            "Проблеми сексуальної дисфункції",
+            "Робота із сімейними парами",
+            "Робота із дітьми",
+            "Робота із болем. Техніки знеболення",
+            "28 годин відпрацювання та рольові вправи"
+        ];
+
+        const grid = document.getElementById('program-grid');
+        topics.forEach((topic, index) => {
+            const item = document.createElement('div');
+            item.className = 'flex items-baseline gap-4 py-4 border-b border-gray-100';
+            item.innerHTML = `
+                <span class="text-yellow-500 font-black text-sm w-7 shrink-0">${String(index + 1).padStart(2, '0')}</span>
+                <span class="font-medium text-base leading-snug">${topic}</span>
+            `;
+            grid.appendChild(item);
+        });
+
+        // ─── Mobile menu ─────────────────────────────────────────────────────
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const bars = menuBtn.querySelectorAll('.menu-bar');
+
+        function closeMobileMenu() {
+            mobileMenu.style.maxHeight = '0px';
+            menuBtn.setAttribute('aria-expanded', 'false');
+            bars[0].style.transform = '';
+            bars[1].style.opacity = '1';
+            bars[2].style.transform = '';
+        }
+
+        menuBtn.addEventListener('click', () => {
+            const isOpen = menuBtn.getAttribute('aria-expanded') === 'true';
+            if (isOpen) {
+                closeMobileMenu();
+            } else {
+                mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+                menuBtn.setAttribute('aria-expanded', 'true');
+                bars[0].style.transform = 'translateY(5.5px) rotate(45deg)';
+                bars[1].style.opacity = '0';
+                bars[2].style.transform = 'translateY(-5.5px) rotate(-45deg)';
+            }
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link =>
+            link.addEventListener('click', closeMobileMenu)
+        );
+
+        // ─── FAQ accordion ──────────────────────────────────────────────────
+        document.querySelectorAll('.faq-trigger').forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const item = trigger.closest('.faq-item');
+                const body = item.querySelector('.faq-body');
+                const icon = trigger.querySelector('.faq-icon');
+                const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+
+                // Close all
+                document.querySelectorAll('.faq-item').forEach(other => {
+                    other.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+                    other.querySelector('.faq-body').style.maxHeight = '0px';
+                    other.querySelector('.faq-icon').style.transform = '';
+                });
+
+                if (!isOpen) {
+                    trigger.setAttribute('aria-expanded', 'true');
+                    body.style.maxHeight = body.scrollHeight + 'px';
+                    icon.style.transform = 'rotate(45deg)';
+                }
+            });
+        });
+
+        // ─── Certificate lightbox ───────────────────────────────────────────
+        function openCert(src, caption) {
+            document.getElementById('cert-lightbox-img').src = src;
+            document.getElementById('cert-lightbox-img').alt = caption;
+            document.getElementById('cert-lightbox-caption').textContent = caption;
+            document.getElementById('cert-lightbox').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCert() {
+            document.getElementById('cert-lightbox').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('cert-lightbox').addEventListener('click', function (e) {
+            if (e.target === this) closeCert();
+        });
+
+        // ─── Form submission ─────────────────────────────────────────────────
+        document.getElementById('lead-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const form = e.target;
+            const btn = document.getElementById('submit-btn');
+            const errEl = document.getElementById('form-error');
+            const data = Object.fromEntries(new FormData(form).entries());
+
+            // Basic client-side validation
+            if (!data.name.trim() || !data.phone.trim() || !data.telegram.trim()) {
+                errEl.textContent = 'Будь ласка, заповніть усі поля.';
+                errEl.classList.remove('hidden');
+                return;
+            }
+            errEl.classList.add('hidden');
+
+            btn.disabled = true;
+            btn.textContent = 'Надсилаємо...';
+
+            try {
+                const res = await fetch('/api/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const json = await res.json();
+
+                if (res.ok && json.success) {
+                    document.getElementById('success-message').classList.remove('hidden');
+                    form.reset();
+                } else {
+                    errEl.textContent = json.error || 'Сталася помилка. Спробуйте ще раз.';
+                    errEl.classList.remove('hidden');
+                }
+            } catch {
+                errEl.textContent = "Помилка з'єднання. Перевірте інтернет і спробуйте ще раз.";
+                errEl.classList.remove('hidden');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'ВІДПРАВИТИ ЗАЯВКУ';
+            }
+        });
+    </script>
+</body>
+
+</html>
