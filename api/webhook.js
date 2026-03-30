@@ -16,6 +16,11 @@ async function send(chat_id, text, extra = {}) {
     });
 }
 
+// Escape Markdown special chars in user-provided content
+function esc(str) {
+    return String(str ?? '').replace(/[_*`[]/g, '\\$&');
+}
+
 async function answerCallback(callback_query_id, text = '') {
     await fetch(`${BOT_API}/answerCallbackQuery`, {
         method: 'POST',
@@ -176,14 +181,33 @@ export default async function handler(req, res) {
         return res.status(200).end();
     }
 
+    // /reply <chat_id> <text> — тільки з адмін-групи
+    if (text.startsWith('/reply') && String(chatId) === String(ADMIN_CHAT_ID)) {
+        const parts  = text.split(' ');
+        const target = parts[1];
+        const reply  = parts.slice(2).join(' ');
+
+        if (!target || !reply) {
+            await send(chatId, 'Формат: `/reply <chat_id> <повідомлення>`');
+        } else {
+            await send(target,
+                `💬 *Відповідь тренера:*\n\n${esc(reply)}`,
+                { reply_markup: mainMenu() }
+            );
+            await send(chatId, `✅ Відповідь надіслано користувачу \`${target}\``);
+        }
+        return res.status(200).end();
+    }
+
     // Any other message — forward to admin group with context
     if (ADMIN_CHAT_ID) {
-        const username = message.from?.username ? `@${message.from.username}` : '—';
+        const username = message.from?.username ? `@${esc(message.from.username)}` : '—';
         const forwardText =
             `📩 *Повідомлення від користувача*\n\n` +
-            `👤 ${name} (${username})\n` +
-            `🆔 chat_id: \`${chatId}\`\n\n` +
-            `💬 ${text}`;
+            `👤 ${esc(name)} (${username})\n` +
+            `🆔 \`${chatId}\`\n\n` +
+            `💬 ${esc(text)}\n\n` +
+            `_Відповісти: /reply ${chatId} ваш текст_`;
         await send(ADMIN_CHAT_ID, forwardText);
 
         await send(chatId,
