@@ -84,26 +84,63 @@
         }
 
         /* AI Chat demo */
-        .role-tab { transition: all 0.2s ease; }
-        .role-tab.active { background: #1a1a1a; color: #fff; }
-        .role-tab.active .role-tab-icon { background: #FFEF00; color: #1a1a1a; }
+        .role-tab {
+            transition: all 0.2s ease;
+        }
+
+        .role-tab.active {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .role-tab.active .role-tab-icon {
+            background: #FFEF00;
+            color: #1a1a1a;
+        }
 
         .chat-msg {
             opacity: 0;
             transform: translateY(8px);
             transition: opacity 0.35s ease, transform 0.35s ease;
         }
-        .chat-msg.visible { opacity: 1; transform: translateY(0); }
+
+        .chat-msg.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         @keyframes blink {
-            0%, 100% { opacity: 0.2; }
-            50%       { opacity: 1; }
-        }
-        .typing-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #6b7280; animation: blink 1.2s infinite; }
-        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
 
-        #chat-viewport { scroll-behavior: smooth; }
+            0%,
+            100% {
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .typing-dot {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #6b7280;
+            animation: blink 1.2s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        #chat-viewport {
+            scroll-behavior: smooth;
+        }
 
         /* Certificate hover */
         .cert-card {
@@ -113,6 +150,145 @@
         .cert-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        /* ─── NEW PROGRAM STYLES ─── */
+        .module-item {
+            border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .module-header {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2.5rem 0;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .module-header:hover .module-title {
+            color: #FFEF00;
+            -webkit-text-stroke: 1.5px black;
+        }
+
+        .module-number {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1;
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-right: 2rem;
+            font-family: 'Inter', sans-serif;
+            opacity: 0.6;
+        }
+
+        .module-item.active {
+            background: rgba(255, 239, 0, 0.02);
+            padding-left: 1rem;
+            padding-right: 1rem;
+            border-radius: 2rem;
+            border-bottom-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .module-item.active .module-number {
+            color: #FFEF00;
+            -webkit-text-stroke: 1.5px black;
+            transform: scale(1.1) translateX(10px);
+            opacity: 1;
+        }
+
+        .module-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .module-item.active .module-content {
+            grid-template-rows: 1fr;
+            padding-bottom: 3rem;
+        }
+
+        .module-inner {
+            min-height: 0;
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .topic-card {
+            background: white;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 2rem;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .topic-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-color: #FFEF00;
+        }
+
+        .topic-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 4px;
+            background: #FFEF00;
+            transition: all 0.4s ease;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .topic-card:hover::after {
+            width: 40%;
+        }
+
+        .module-toggle {
+            width: 56px;
+            height: 56px;
+            border-radius: 1.5rem;
+            border: 2px solid rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+        }
+
+        .module-item.active .module-toggle {
+            background: black;
+            border-color: black;
+            color: #FFEF00;
+            transform: rotate(45deg);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .module-number {
+                font-size: 2.5rem;
+                margin-right: 1rem;
+            }
+            .module-header {
+                padding: 1.5rem 0;
+            }
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -199,7 +375,8 @@
 
             <div class="order-1 md:order-2 relative hidden md:block">
                 <div class="w-full aspect-square rounded-[3rem] overflow-hidden relative ai-glow">
-                    <img src="hero.png" alt="Школа психологічного консультування" class="w-full h-full object-cover object-center">
+                    <img src="hero.png" alt="Школа психологічного консультування"
+                        class="w-full h-full object-cover object-center">
                 </div>
                 <!-- Floating badge -->
                 <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-3xl shadow-2xl max-w-[200px]">
@@ -214,16 +391,17 @@
     <section class="py-20 px-6 md:px-12 bg-white">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-10">
-                <div class="inline-block bg-black text-white px-4 py-1 rounded-full text-xs font-bold mb-4 tracking-widest uppercase">Відеозапрошення</div>
-                <h2 class="text-3xl md:text-4xl font-extrabold leading-tight">Дізнайтеся більше про курс<br>за 3 хвилини</h2>
+                <div
+                    class="inline-block bg-black text-white px-4 py-1 rounded-full text-xs font-bold mb-4 tracking-widest uppercase">
+                    Відеозапрошення</div>
+                <h2 class="text-3xl md:text-4xl font-extrabold leading-tight">Дізнайтеся більше про курс<br>за 3 хвилини
+                </h2>
             </div>
             <div class="relative w-full rounded-[2rem] overflow-hidden shadow-2xl" style="padding-top: 56.25%;">
-                <iframe
-                    src="https://www.youtube-nocookie.com/embed/ma8xzgUTcSM?rel=0&modestbranding=1"
+                <iframe src="https://www.youtube-nocookie.com/embed/ma8xzgUTcSM?rel=0&modestbranding=1"
                     title="Відеозапрошення на курс"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                    class="absolute inset-0 w-full h-full border-0">
+                    allowfullscreen class="absolute inset-0 w-full h-full border-0">
                 </iframe>
             </div>
         </div>
@@ -343,32 +521,41 @@
 
             <!-- Header -->
             <div class="text-center mb-12">
-                <div class="bg-yellow-brand inline-block px-4 py-1 rounded-lg text-xs font-black uppercase tracking-tighter mb-4">Технологія 2026</div>
+                <div
+                    class="bg-yellow-brand inline-block px-4 py-1 rounded-lg text-xs font-black uppercase tracking-tighter mb-4">
+                    Технологія 2026</div>
                 <h2 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">Персональний ШІ-асистент</h2>
-                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Відпрацьовуйте реальні сесії 24/7 — асистент працює у трьох режимах. Натисніть на роль, щоб побачити, як це виглядає.</p>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Відпрацьовуйте реальні сесії 24/7 — асистент працює у
+                    трьох режимах. Натисніть на роль, щоб побачити, як це виглядає.</p>
             </div>
 
             <!-- Role tabs -->
             <div class="flex flex-col sm:flex-row gap-3 mb-8 justify-center">
-                <button class="role-tab active flex items-center gap-3 px-6 py-4 rounded-2xl border-2 border-black text-left sm:text-center"
-                        data-role="supervisor">
-                    <span class="role-tab-icon bg-yellow-brand text-black w-9 h-9 rounded-xl flex items-center justify-center text-lg shrink-0">🎓</span>
+                <button
+                    class="role-tab active flex items-center gap-3 px-6 py-4 rounded-2xl border-2 border-black text-left sm:text-center"
+                    data-role="supervisor">
+                    <span
+                        class="role-tab-icon bg-yellow-brand text-black w-9 h-9 rounded-xl flex items-center justify-center text-lg shrink-0">🎓</span>
                     <div>
                         <div class="font-black text-sm uppercase tracking-wide">Супервізор</div>
                         <div class="text-xs text-gray-500 font-normal">Розбирає теми та помилки</div>
                     </div>
                 </button>
-                <button class="role-tab flex items-center gap-3 px-6 py-4 rounded-2xl border-2 border-gray-200 text-left sm:text-center"
-                        data-role="client">
-                    <span class="role-tab-icon bg-gray-100 w-9 h-9 rounded-xl flex items-center justify-center text-lg shrink-0">👤</span>
+                <button
+                    class="role-tab flex items-center gap-3 px-6 py-4 rounded-2xl border-2 border-gray-200 text-left sm:text-center"
+                    data-role="client">
+                    <span
+                        class="role-tab-icon bg-gray-100 w-9 h-9 rounded-xl flex items-center justify-center text-lg shrink-0">👤</span>
                     <div>
                         <div class="font-black text-sm uppercase tracking-wide">Клієнт</div>
                         <div class="text-xs text-gray-500 font-normal">Симулює реальну сесію</div>
                     </div>
                 </button>
-                <button class="role-tab flex items-center gap-3 px-6 py-4 rounded-2xl border-2 border-gray-200 text-left sm:text-center"
-                        data-role="psychologist">
-                    <span class="role-tab-icon bg-gray-100 w-9 h-9 rounded-xl flex items-center justify-center text-lg shrink-0">🧠</span>
+                <button
+                    class="role-tab flex items-center gap-3 px-6 py-4 rounded-2xl border-2 border-gray-200 text-left sm:text-center"
+                    data-role="psychologist">
+                    <span
+                        class="role-tab-icon bg-gray-100 w-9 h-9 rounded-xl flex items-center justify-center text-lg shrink-0">🧠</span>
                     <div>
                         <div class="font-black text-sm uppercase tracking-wide">Психолог</div>
                         <div class="text-xs text-gray-500 font-normal">Демонструє КПТ-техніки</div>
@@ -385,7 +572,8 @@
                     <span id="ai-status-sub" class="text-gray-500 text-xs ml-auto">ШІ-асистент курсу</span>
                 </div>
                 <!-- Messages -->
-                <div id="chat-viewport" class="px-6 py-6 space-y-4 overflow-y-auto" style="min-height:320px; max-height:420px;">
+                <div id="chat-viewport" class="px-6 py-6 space-y-4 overflow-y-auto"
+                    style="min-height:320px; max-height:420px;">
                     <!-- injected by JS -->
                 </div>
                 <!-- Typing indicator -->
@@ -412,14 +600,16 @@
                     складними розладами.</p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-x-16 gap-y-0" id="program-grid"></div>
+            <div class="space-y-4" id="program-accordion"></div>
 
             <!-- Bot CTA -->
             <div class="text-center mt-14">
                 <a href="https://t.me/psy_school_ua_bot?start=program" target="_blank"
                     class="inline-flex items-center gap-3 bg-black text-white px-10 py-4 rounded-2xl font-bold text-lg btn-hover">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.1 13.945l-2.94-.92c-.64-.203-.654-.64.136-.954l11.49-4.43c.532-.194 1 .13.807.58z"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 shrink-0" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path
+                            d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.1 13.945l-2.94-.92c-.64-.203-.654-.64.136-.954l11.49-4.43c.532-.194 1 .13.807.58z" />
                     </svg>
                     Отримати програму в боті
                 </a>
@@ -636,10 +826,11 @@
                 <div class="bg-yellow-brand p-10 rounded-[3rem] text-center max-w-sm mx-4">
                     <div class="text-6xl mb-4">🚀</div>
                     <h3 class="text-3xl font-black mb-3">Дякуємо!</h3>
-                    <p class="font-semibold mb-6">Заявка прийнята. Поки очікуєте — перейдіть у наш бот: отримайте перші 4 уроки та задайте питання тренеру.</p>
+                    <p class="font-semibold mb-6">Заявка прийнята. Поки очікуєте — перейдіть у наш бот: отримайте перші
+                        4 уроки та задайте питання тренеру.</p>
                     <div class="flex flex-col gap-3">
                         <a href="https://t.me/psy_school_ua_bot?start=lessons" target="_blank"
-                           class="bg-black text-white px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition-colors">
+                            class="bg-black text-white px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition-colors">
                             Перейти до бота →
                         </a>
                         <button onclick="document.getElementById('success-message').classList.add('hidden')"
@@ -673,35 +864,35 @@
             supervisor: {
                 label: 'Супервізор активний',
                 messages: [
-                    { from: 'you',  text: 'Як працювати з клієнтом, який постійно каже "мені завжди не щастить"?' },
-                    { from: 'ai',   text: 'Це класичне когнітивне викривлення — глобальне наклеювання ярликів. Ключ: сократівське питання.', label: '🎓 Супервізор' },
-                    { from: 'ai',   text: 'Спитайте: "Наведіть хоча б один маленький приклад, коли вам таки щастило?" Навіть незначний.', label: '🎓 Супервізор' },
-                    { from: 'you',  text: 'А якщо клієнт справді не може нічого пригадати?' },
-                    { from: 'ai',   text: '"Ви сьогодні прийшли на сесію. Це теж невдача?" — Маленькі виключення руйнують абсолютизацію м\'яко, без спротиву.', label: '🎓 Супервізор' },
-                    { from: 'ai',   text: '✓ Техніка: виявлення виключень. Домашнє завдання: попросити клієнта записувати 1 позитивний факт на день.', label: '📋 Фідбек', accent: true },
+                    { from: 'you', text: 'Як працювати з клієнтом, який постійно каже "мені завжди не щастить"?' },
+                    { from: 'ai', text: 'Це класичне когнітивне викривлення — глобальне наклеювання ярликів. Ключ: сократівське питання.', label: '🎓 Супервізор' },
+                    { from: 'ai', text: 'Спитайте: "Наведіть хоча б один маленький приклад, коли вам таки щастило?" Навіть незначний.', label: '🎓 Супервізор' },
+                    { from: 'you', text: 'А якщо клієнт справді не може нічого пригадати?' },
+                    { from: 'ai', text: '"Ви сьогодні прийшли на сесію. Це теж невдача?" — Маленькі виключення руйнують абсолютизацію м\'яко, без спротиву.', label: '🎓 Супервізор' },
+                    { from: 'ai', text: '✓ Техніка: виявлення виключень. Домашнє завдання: попросити клієнта записувати 1 позитивний факт на день.', label: '📋 Фідбек', accent: true },
                 ]
             },
             client: {
                 label: 'Клієнт — симуляція сесії',
                 messages: [
-                    { from: 'ai',   text: 'Я весь час думаю, що щось станеться з моїми дітьми. Не можу зупинити ці думки. Вже місяць нормально не сплю...', label: '👤 Клієнт · 34 роки · тривожність' },
-                    { from: 'you',  text: 'Коли ці думки зʼявляються найчастіше?' },
-                    { from: 'ai',   text: 'Ввечері, коли діти вже сплять. Я встаю перевіряти по кілька разів за ніч.', label: '👤 Клієнт' },
-                    { from: 'you',  text: 'Що саме ви боїтеся виявити, коли заходите?' },
-                    { from: 'ai',   text: '...Що їх немає. Що щось сталося, поки я спав.', label: '👤 Клієнт' },
-                    { from: 'ai',   text: '✓ Ви виявили ключовий страх клієнта. Наступний крок: АВС-аналіз та перевірка реалістичності думки.', label: '📋 Фідбек', accent: true },
+                    { from: 'ai', text: 'Я весь час думаю, що щось станеться з моїми дітьми. Не можу зупинити ці думки. Вже місяць нормально не сплю...', label: '👤 Клієнт · 34 роки · тривожність' },
+                    { from: 'you', text: 'Коли ці думки зʼявляються найчастіше?' },
+                    { from: 'ai', text: 'Ввечері, коли діти вже сплять. Я встаю перевіряти по кілька разів за ніч.', label: '👤 Клієнт' },
+                    { from: 'you', text: 'Що саме ви боїтеся виявити, коли заходите?' },
+                    { from: 'ai', text: '...Що їх немає. Що щось сталося, поки я спав.', label: '👤 Клієнт' },
+                    { from: 'ai', text: '✓ Ви виявили ключовий страх клієнта. Наступний крок: АВС-аналіз та перевірка реалістичності думки.', label: '📋 Фідбек', accent: true },
                 ]
             },
             psychologist: {
-                label: 'Психолог — демонстрація КПТ',
+                label: 'Психолог — демонстрація',
                 messages: [
-                    { from: 'you',  text: 'Мене звільнили. Я повний невдаха.' },
-                    { from: 'ai',   text: 'Це боляче — втратити роботу. Розкажіть: що саме сталося?', label: '🧠 Психолог · КПТ' },
-                    { from: 'you',  text: 'Скоротили відділ, але залишили інших — значить я найгірший.' },
-                    { from: 'ai',   text: '"Скоротили відділ, залишили інших → я найгірший." Як ви прийшли до цього висновку?', label: '🧠 Психолог · КПТ' },
-                    { from: 'you',  text: 'Ну... не знаю. Здається логічним.' },
-                    { from: 'ai',   text: 'Чи знаєте ви особисто, за якими критеріями обирали? Або це ваше припущення?', label: '🧠 Психолог · КПТ' },
-                    { from: 'ai',   text: '✓ Техніка сократівських питань: замість заперечення — дослідження разом. Клієнт сам доходить до висновку.', label: '📋 Техніка', accent: true },
+                    { from: 'you', text: 'Мене звільнили. Я повний невдаха.' },
+                    { from: 'ai', text: 'Це боляче — втратити роботу. Розкажіть: що саме сталося?', label: '🧠 Психолог' },
+                    { from: 'you', text: 'Скоротили відділ, але залишили інших — значить я найгірший.' },
+                    { from: 'ai', text: '"Скоротили відділ, залишили інших → я найгірший." Як ви прийшли до цього висновку?', label: '🧠 Психолог' },
+                    { from: 'you', text: 'Ну... не знаю. Здається логічним.' },
+                    { from: 'ai', text: 'Чи знаєте ви особисто, за якими критеріями обирали? Або це ваше припущення?', label: '🧠 Психолог' },
+                    { from: 'ai', text: '✓ Техніка сократівських питань: замість заперечення — дослідження разом. Клієнт сам доходить до висновку.', label: '📋 Техніка', accent: true },
                 ]
             }
         };
@@ -713,9 +904,9 @@
         }
 
         function runChat(role) {
-            const chat    = AI_CHATS[role];
-            const vp      = document.getElementById('chat-viewport');
-            const typing  = document.getElementById('ai-typing');
+            const chat = AI_CHATS[role];
+            const vp = document.getElementById('chat-viewport');
+            const typing = document.getElementById('ai-typing');
             const statusL = document.getElementById('ai-status-label');
 
             clearTimeout(aiTimer);
@@ -791,50 +982,110 @@
         // Auto-start
         runChat('supervisor');
 
-        // ─── Program grid ───────────────────────────────────────────────────
-        const topics = [
-            "Підлаштування під клієнта. Підтримуюче та активне слухання",
-            "Перші 5 хвилин консультації: Психологічний контракт",
-            "Питання, які виявляють сфери роботи",
-            "Невербальні реакції клієнта",
-            "Додаткова інформація про клієнта: вік, ролі, типи",
-            "Рівні розвитку особистості",
-            "Ієрархія когнітивних механізмів, АВС-аналіз",
-            "«Кодекс невротика», стратегії обробки інформації",
-            "Другий план, саморефлексія",
-            "Теорія установок. Дезадаптивні установки",
-            "Розлади особистості: Кластери А, В та С",
-            "Умови поставлення якісного результату",
-            "Сократівські питання",
-            "Основи коучінгової роботи",
-            "Рівні роботи та показання",
-            "Когнітивні помилки та їх корекція",
-            "Корекція установок",
-            "Сугестивні речення та метафори",
-            "Вправи та домашні завдання",
-            "Консультування депресивного розладу",
-            "Консультування тривожного розладу та панічних атак",
-            "Консультування ОКР",
-            "Консультування ПТСР",
-            "Консультування розладів харчової поведінки",
-            "Консультування осіб із залежностями",
-            "Консультування із приводу горя та втрати",
-            "Проблеми сексуальної дисфункції",
-            "Робота із сімейними парами",
-            "Робота із дітьми",
-            "Робота із болем. Техніки знеболення",
-            "28 годин відпрацювання та рольові вправи"
+        // ─── Program grid (Modular Redesign) ────────────────────────────────
+        const courseModules = [
+            {
+                id: "01",
+                title: "Налагодження контакту",
+                topics: [
+                    { title: "Підлаштування під клієнта", desc: "Мистецтво активного слухання та створення атмосфери довіри через вербальні та невербальні техніки." },
+                    { title: "Психологічний контракт", desc: "Як за перші 5 хвилин встановити межі терапії, обговорити відповідальність та очікування клієнта." },
+                    { title: "Виявлення сфер роботи", desc: "Професійний збір анамнезу та фокусування на ключовій проблемі запиту." },
+                    { title: "Невербальні реакції", desc: "Читання прихованих сигналів тіла, міміки та голосу для глибшого розуміння стану клієнта." }
+                ]
+            },
+            {
+                id: "02",
+                title: "Аналіз особистості",
+                topics: [
+                    { title: "Типи мислення та вікові норми", desc: "Особливості консультування різних вікових груп та специфіка когнітивних процесів." },
+                    { title: "Рівні розвитку особистості", desc: "Відмінності між невротичним, пограничним та психотичним рівнями функціонування." },
+                    { title: "Розлади особистості (Кластери А, В, С)", desc: "Діагностика та стратегії взаємодії з різними типами особистісних акцентуацій." },
+                    { title: "Кодекс невротика", desc: "Виявлення глибинних механізмів підтримки тривожних та нав'язливих станів." }
+                ]
+            },
+            {
+                id: "03",
+                title: "Основи когнітивного підходу",
+                topics: [
+                    { title: "Ієрархія когнітивних механізмів", desc: "Розуміння того, як автоматичні думки формують емоції та поведінку." },
+                    { title: "ABC-аналіз", desc: "Базова техніка розбору ситуацій для виявлення ірраціональних переконань." },
+                    { title: "Теорія та корекція установок", desc: "Робота з переконаннями, що обмежують розвиток та якість життя людини." },
+                    { title: "Когнітивні помилки", desc: "Техніки виявлення «катастрофізації», «чорно-білого мислення» та інших логічних викривлень." }
+                ]
+            },
+            {
+                id: "04",
+                title: "Корекційна робота",
+                topics: [
+                    { title: "Сократівські питання", desc: "Метод спрямованого відкриття, де клієнт сам знаходить логічні суперечності." },
+                    { title: "Основи коучінгової роботи", desc: "Постановка якісного результату та мотивація клієнта до змін." },
+                    { title: "Сугестивні метафори", desc: "Використання образної мови для обходу психологічного спротиву." },
+                    { title: "Домашні завдання", desc: "Проектування вправ для закріплення результатів сесії у реальному житті." }
+                ]
+            },
+            {
+                id: "05",
+                title: "Специфічна симптоматика",
+                topics: [
+                    { title: "Депресивні розлади", desc: "Протоколи роботи з апатією, втратою сенсів та низькою життєвою енергією." },
+                    { title: "Тривога та панічні атаки", desc: "Методи швидкого купірування паніки та робота з генералізованою тривогою." },
+                    { title: "ОКР та ПТСР", desc: "Специфіка роботи з нав'язливими думками та психологічними травмами." },
+                    { title: "Розлади харчової поведінки", desc: "Психологічний супровід клієнтів з анорексією, булімією та компульсивним переїданням." },
+                    { title: "Залежності та співзалежність", desc: "Основи консультування при адиктивній поведінці." }
+                ]
+            },
+            {
+                id: "06",
+                title: "Сімейне та спеціальне консультування",
+                topics: [
+                    { title: "Робота із сімейними парами", desc: "Вирішення конфліктів, відновлення комунікації та робота з кризами у стосунках." },
+                    { title: "Сексуальна дисфункція", desc: "Психологічні аспекти статевого життя та подолання бар'єрів." },
+                    { title: "Горе та втрата", desc: "Супровід клієнта через етапи проживання втрати близької людини." },
+                    { title: "Робота із болем", desc: "Психосоматика та техніки психологічного знеболення." }
+                ]
+            }
         ];
 
-        const grid = document.getElementById('program-grid');
-        topics.forEach((topic, index) => {
-            const item = document.createElement('div');
-            item.className = 'flex items-baseline gap-4 py-4 border-b border-gray-100';
-            item.innerHTML = `
-                <span class="text-yellow-500 font-black text-sm w-7 shrink-0">${String(index + 1).padStart(2, '0')}</span>
-                <span class="font-medium text-base leading-snug">${topic}</span>
+        const accordion = document.getElementById('program-accordion');
+        courseModules.forEach((mod, index) => {
+            const modEl = document.createElement('div');
+            modEl.className = `module-item ${index === 0 ? 'active' : ''}`;
+            modEl.innerHTML = `
+                <div class="module-header">
+                    <div class="flex items-center">
+                        <span class="module-number">${mod.id}</span>
+                        <div>
+                            <span class="block text-xs font-black uppercase tracking-widest text-gray-400 mb-1">Модуль</span>
+                            <h3 class="text-xl md:text-2xl font-extrabold uppercase leading-tight module-title">${mod.title}</h3>
+                        </div>
+                    </div>
+                    <div class="module-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    </div>
+                </div>
+                <div class="module-content">
+                    <div class="module-inner pt-4">
+                        <div class="topic-grid">
+                            ${mod.topics.map(t => `
+                                <div class="topic-card">
+                                    <h4 class="font-bold text-lg mb-2 leading-snug">${t.title}</h4>
+                                    <p class="text-sm text-gray-500 leading-relaxed">${t.desc}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
             `;
-            grid.appendChild(item);
+            
+            modEl.querySelector('.module-header').addEventListener('click', () => {
+                const isActive = modEl.classList.contains('active');
+                // Close others
+                document.querySelectorAll('.module-item').forEach(m => m.classList.remove('active'));
+                if (!isActive) modEl.classList.add('active');
+            });
+
+            accordion.appendChild(modEl);
         });
 
         // ─── Mobile menu ─────────────────────────────────────────────────────
