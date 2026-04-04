@@ -169,8 +169,14 @@
         }
 
         .module-header:hover .module-title {
+            color: black;
+            transform: translateX(10px);
+        }
+
+        .module-header:hover .module-number {
             color: #FFEF00;
             -webkit-text-stroke: 1.5px black;
+            opacity: 1;
         }
 
         .module-number {
@@ -197,8 +203,13 @@
         .module-item.active .module-number {
             color: #FFEF00;
             -webkit-text-stroke: 1.5px black;
-            transform: scale(1.1) translateX(10px);
+            transform: scale(1.1);
             opacity: 1;
+        }
+
+        .module-item.active .module-title {
+            color: #FFEF00;
+            -webkit-text-stroke: 1px black;
         }
 
         .module-content {
