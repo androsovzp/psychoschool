@@ -46,14 +46,20 @@ export default async function handler(req, res) {
 
   const sourceLabel = source === 'installment' ? '💳 Оплата частинами' : '📋 Повна оплата';
   const promoEntry = getPromoEntry(promo);
-  const promoLine = promoEntry
-    ? `🎫 Промокод: ${promo.trim()} (реферер: ${promoEntry.referrer}, знижка ${promoEntry.discount.toLocaleString('uk-UA')} грн)`
-    : null;
+  
+  let promoDetails = null;
+  if (promo && promo.trim()) {
+    if (promoEntry) {
+      promoDetails = `🎟️ Промокод: ${promo.toUpperCase().trim()}\n👥 Реферер: ${promoEntry.referrer}\n💰 Знижка: ${promoEntry.discount.toLocaleString('uk-UA')} грн`;
+    } else {
+      promoDetails = `🎟️ Промокод: ${promo.trim()} (Реферер не знайдений)`;
+    }
+  }
 
   const textParts = [
     '🎓 Нова заявка на курс',
     sourceLabel,
-    promoLine,
+    promoDetails,
     `👤 Ім'я: ${name}`,
     `📞 Телефон: ${phone}`,
     `✈️ Telegram: ${telegram}`,
@@ -78,7 +84,15 @@ export default async function handler(req, res) {
       return res.status(502).json({ error: 'Помилка відправки повідомлення' });
     }
 
-    await logToSheets({ type: 'registration', name, phone, telegram, source: source || 'full' });
+    await logToSheets({ 
+      type: 'registration', 
+      name, 
+      phone, 
+      telegram, 
+      source: source || 'full', 
+      promo: promo || '',
+      referrer: promoEntry ? promoEntry.referrer : ''
+    });
     return res.status(200).json({ success: true });
   } catch (err) {
     console.error('Fetch to Telegram failed:', err);
