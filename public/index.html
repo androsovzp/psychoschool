@@ -1556,6 +1556,8 @@
             const data = Object.fromEntries(new FormData(form).entries());
             if (validatedPromo) data.promo = validatedPromo;
 
+            console.log('[DEBUG] Form Submission Payload:', data);
+
             // Basic client-side validation
             if (!data.name.trim() || !data.phone.trim() || !data.telegram.trim()) {
                 errEl.textContent = 'Будь ласка, заповніть усі поля.';
@@ -1575,6 +1577,7 @@
                 });
 
                 const json = await res.json();
+                console.log('[DEBUG] Server Response:', json);
 
                 if (res.ok && json.success) {
                     document.getElementById('success-message').classList.remove('hidden');
@@ -1616,14 +1619,16 @@
                 const json = await res.json();
 
                 if (json.valid) {
+                    console.log('[DEBUG] Promo Valid:', json.discount);
                     validatedPromo = code;
                     badge.textContent = `✅ Знижка ${json.discount.toLocaleString('uk-UA')} грн застосована`;
-                    badge.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold px-3 py-1 rounded-xl bg-green-100 text-green-700';
+                    badge.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-sm font-bold px-3 py-1 rounded-xl bg-green-100 text-green-700';
                     badge.classList.remove('hidden');
                     document.getElementById('promo-input').classList.remove('border-gray-200', 'border-red-400');
                     document.getElementById('promo-input').classList.add('border-green-400');
                     msg.classList.add('hidden');
                 } else {
+                    console.warn('[DEBUG] Promo Invalid:', json.reason || 'Not found');
                     validatedPromo = null;
                     badge.classList.add('hidden');
                     document.getElementById('promo-input').classList.remove('border-gray-200', 'border-green-400');
