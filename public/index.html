@@ -168,6 +168,13 @@
 
         #chat-viewport {
             scroll-behavior: smooth;
+            height: 400px; /* Fixed height to prevent "dancing" of content below */
+        }
+
+        @media (max-width: 640px) {
+            #chat-viewport {
+                height: 380px; /* Adjust height for mobile devices */
+            }
         }
 
         /* Certificate hover */
@@ -812,8 +819,7 @@
                     <span id="ai-status-sub" class="text-gray-500 text-xs ml-auto">ШІ-асистент курсу</span>
                 </div>
                 <!-- Messages -->
-                <div id="chat-viewport" class="px-6 py-6 space-y-4 overflow-y-auto"
-                    style="min-height:320px; max-height:420px;">
+                <div id="chat-viewport" class="px-6 py-6 space-y-4 overflow-y-auto">
                     <!-- injected by JS -->
                 </div>
                 <!-- Typing indicator -->
@@ -1333,12 +1339,24 @@
                 btn.classList.replace('border-gray-200', 'border-black');
                 btn.querySelector('.role-tab-icon').className = btn.querySelector('.role-tab-icon').className
                     .replace('bg-gray-100', 'bg-yellow-brand text-black');
+                chatStarted = true;
                 runChat(btn.dataset.role);
             });
         });
 
-        // Auto-start
-        runChat('supervisor');
+        // Auto-start when in view
+        let chatStarted = false;
+        const chatObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !chatStarted) {
+                    chatStarted = true;
+                    runChat('supervisor');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        const aiSection = document.getElementById('ai');
+        if (aiSection) chatObserver.observe(aiSection);
 
         // ─── Program grid (Modular Redesign) ────────────────────────────────
         const courseModules = [
