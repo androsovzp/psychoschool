@@ -1,6 +1,20 @@
 const BOT_API = `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}`;
 const ADMIN_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
+async function logToSheets(payload) {
+  const url = process.env.SHEETS_WEBHOOK_URL;
+  if (!url) return;
+  try {
+    await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  } catch (err) {
+    console.error('Sheets log failed (non-critical):', err);
+  }
+}
+
 const FREE_LESSONS = [
     { n: 1, title: 'Підлаштування під клієнта. Активне слухання', url: 'https://youtu.be/lcvBUbh8y9g' },
     { n: 2, title: 'Перші 5 хвилин консультації', url: 'https://youtu.be/zz2pAT7aYcg' },
@@ -164,7 +178,25 @@ export default async function handler(req, res) {
             return res.status(200).end();
         }
 
-        // Default /start — welcome message
+        if (param === 'ask_trainer') {
+            await send(chatId,
+                `💬 *Задати питання тренеру*\n\n` +
+                `Напишіть ваше запитання наступним повідомленням — тренер відповість особисто.`,
+                { reply_markup: { force_reply: true, input_field_placeholder: 'Ваше запитання...' } }
+            );
+            return res.status(200).end();
+        }
+
+        // Default /start — welcome message + CRM notification to admin
+        const username = message.from?.username ? `@${message.from.username}` : '—';
+        const crmText = [
+            '🤖 Новий користувач бота',
+            `👤 Ім'я: ${name}`,
+            `✈️ Telegram: ${username}`,
+            `🆔 Chat ID: \`${chatId}\``,
+            `🕐 ${new Date().toLocaleString('uk-UA', { timeZone: 'Europe/Kyiv' })}`
+        ].join('\n');
+        await send(ADMIN_CHAT_ID, crmText);
         await send(chatId,
             `👋 *Привіт, ${name}!*\n\n` +
             `Вітаємо в боті *Школи психологічного консультування* — авторського 6-місячного курсу ` +
