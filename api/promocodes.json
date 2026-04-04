@@ -1,0 +1,17 @@
+{
+  "DISCOUNT74": {
+    "discount": 2000,
+    "referrer": "Дарія Присяжнюк",
+    "active": true
+  },
+  "DISCOUNT13": {
+    "discount": 2000,
+    "referrer": "Вікторія Найчук",
+    "active": true
+  },
+  "DISCOUNT80": {
+    "discount": 2000,
+    "referrer": "Валерій Андросов",
+    "active": true
+  }
+}

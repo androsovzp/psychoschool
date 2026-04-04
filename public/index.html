@@ -1789,6 +1789,58 @@
             }
         });
     </script>
+
+    <script>
+        // ─── Input Masks ─────────────────────────────────────────────────────────
+        (function() {
+            // -- Phone Mask (+380 (XX) XXX XX XX) --
+            const phoneInputs = document.querySelectorAll('input[type="tel"]');
+            phoneInputs.forEach(input => {
+                input.addEventListener('input', (e) => {
+                    let cursorPosition = e.target.selectionStart;
+                    let oldLength = e.target.value.length;
+                    
+                    let x = e.target.value.replace(/\D/g, '');
+                    // Ensure it starts with 380
+                    if (x.length > 0 && !x.startsWith('380')) {
+                        x = '380' + x;
+                    }
+                    
+                    let formatted = '+';
+                    if (x.length > 0) formatted += x.substring(0, 3);
+                    if (x.length > 3) formatted += ' (' + x.substring(3, 5);
+                    if (x.length > 5) formatted += ') ' + x.substring(5, 8);
+                    if (x.length > 8) formatted += ' ' + x.substring(8, 10);
+                    if (x.length > 10) formatted += ' ' + x.substring(10, 12);
+                    
+                    e.target.value = formatted.substring(0, 19);
+                    
+                    // Adjust cursor position if needed
+                    let newLength = e.target.value.length;
+                    cursorPosition = cursorPosition + (newLength - oldLength);
+                    e.target.setSelectionRange(cursorPosition, cursorPosition);
+                });
+
+                // Initialize with prefix on focus
+                input.addEventListener('focus', (e) => {
+                    if (!e.target.value || e.target.value === '+') {
+                        e.target.value = '+380 ';
+                    }
+                });
+            });
+
+            // -- Telegram Mask (@) --
+            const tgInputs = document.querySelectorAll('input[name="telegram"], input[name="contact"]');
+            tgInputs.forEach(input => {
+                input.addEventListener('blur', (e) => {
+                    let val = e.target.value.trim();
+                    if (val && !val.startsWith('@') && !val.includes('/') && !val.includes('t.me')) {
+                        e.target.value = '@' + val;
+                    }
+                });
+            });
+        })();
+    </script>
 </body>
 
 </html>

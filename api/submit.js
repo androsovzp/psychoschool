@@ -1,4 +1,4 @@
-import codesRaw from '../promocodes.json' assert { type: 'json' };
+import codesRaw from './promocodes.json' assert { type: 'json' };
 
 function getPromoEntry(code) {
   if (!code) return null;
