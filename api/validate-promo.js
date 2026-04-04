@@ -14,7 +14,7 @@ export default function handler(req, res) {
   try {
     const raw = readFileSync(join(process.cwd(), 'promocodes.json'), 'utf8');
     const codes = JSON.parse(raw);
-    const entry = codes[code.toLowerCase().trim()];
+    const entry = codes[code.toUpperCase().trim()];
 
     if (entry && entry.active) {
       // Return discount only — referrer stays server-side
