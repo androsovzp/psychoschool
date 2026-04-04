@@ -1,5 +1,4 @@
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import codesRaw from '../promocodes.json' assert { type: 'json' };
 
 export default function handler(req, res) {
   if (req.method !== 'POST') {
@@ -12,27 +11,27 @@ export default function handler(req, res) {
   }
 
   try {
-    const filePath = join(process.cwd(), 'promocodes.json');
-    console.log('Validating code:', code, 'Normalized:', code.toUpperCase().trim());
-    console.log('Looking for file at:', filePath);
+    const normalizedInput = code.toUpperCase().trim();
+    console.log(`[PROMO] Input: "${code}" -> Normalized: "${normalizedInput}"`);
     
-    const raw = readFileSync(filePath, 'utf8');
-    const codes = JSON.parse(raw);
-    console.log('Available codes:', Object.keys(codes));
+    // Normalize all keys from JSON to be safe
+    const codes = {};
+    Object.keys(codesRaw).forEach(k => {
+      codes[k.toUpperCase().trim()] = codesRaw[k];
+    });
     
-    const entry = codes[code.toUpperCase().trim()];
-    console.log('Found entry:', entry);
+    console.log('[PROMO] Available normalized keys:', Object.keys(codes));
+    
+    const entry = codes[normalizedInput];
+    console.log('[PROMO] Result for', normalizedInput, ':', entry ? 'FOUND' : 'NOT FOUND');
 
     if (entry && entry.active) {
       return res.status(200).json({ valid: true, discount: entry.discount });
     }
 
-    return res.status(200).json({ valid: false });
+    return res.status(200).json({ valid: false, reason: 'invalid_or_inactive' });
   } catch (err) {
-    console.error('PROMO_ERROR:', err.message);
-    if (err.code === 'ENOENT') {
-      console.error('File promocodes.json NOT FOUND at', join(process.cwd(), 'promocodes.json'));
-    }
-    return res.status(200).json({ valid: false, error: 'Internal server error during validation' });
+    console.error('PROMO_CRASH:', err);
+    return res.status(500).json({ valid: false, error: err.message });
   }
 }

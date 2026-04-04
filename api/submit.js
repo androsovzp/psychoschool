@@ -1,16 +1,14 @@
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import codesRaw from '../promocodes.json' assert { type: 'json' };
 
 function getPromoEntry(code) {
   if (!code) return null;
-  try {
-    const raw = readFileSync(join(process.cwd(), 'promocodes.json'), 'utf8');
-    const codes = JSON.parse(raw);
-    const entry = codes[code.toUpperCase().trim()];
-    return entry && entry.active ? entry : null;
-  } catch {
-    return null;
-  }
+  const normalizedInput = code.toUpperCase().trim();
+  const codes = {};
+  Object.keys(codesRaw).forEach(k => {
+    codes[k.toUpperCase().trim()] = codesRaw[k];
+  });
+  const entry = codes[normalizedInput];
+  return entry && entry.active ? entry : null;
 }
 
 async function logToSheets(payload) {
