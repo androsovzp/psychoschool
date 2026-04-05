@@ -1,4 +1,9 @@
-import codesRaw from './promocodes.json' assert { type: 'json' };
+import { readFileSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const codesRaw = JSON.parse(readFileSync(join(__dirname, 'promocodes.json'), 'utf8'));
 
 function getPromoEntry(code) {
   if (!code) return null;
