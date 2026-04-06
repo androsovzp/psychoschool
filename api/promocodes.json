@@ -13,5 +13,10 @@
     "discount": 2000,
     "referrer": "Валерій Андросов",
     "active": true
+  },
+  "DISCOUNT18": {
+    "discount": 2000,
+    "referrer": "Саша Дудник",
+    "active": true
   }
 }
