@@ -214,22 +214,26 @@ export default async function handler(req, res) {
     }
 
     // Відповідь адміна через reply на повідомлення бота в групі
-    if (String(chatId) === String(ADMIN_CHAT_ID) && message.reply_to_message) {
-        const replyTo = message.reply_to_message;
-        const match   = replyTo.text?.match(/🆔\s*`?(-?\d+)`?/);
-        const target  = match?.[1];
+    if (String(chatId) === String(ADMIN_CHAT_ID)) {
+        if (message.reply_to_message) {
+            const replyTo = message.reply_to_message;
+            const match   = replyTo.text?.match(/🆔\s*`?(-?\d+)`?/);
+            const target  = match?.[1];
 
-        if (target) {
-            await send(target,
-                `💬 *Відповідь тренера:*\n\n${esc(text)}`,
-                { reply_markup: mainMenu() }
-            );
-            await send(chatId, `✅ Надіслано`);
+            if (target) {
+                await send(target,
+                    `💬 *Відповідь тренера:*\n\n${esc(text)}`,
+                    { reply_markup: mainMenu() }
+                );
+                // Залишаємо коротке підтвердження в групі
+                await send(chatId, `✅ Відповідь надіслано користувачеві ${target}`);
+            }
         }
+        // ВАЖЛИВО: Перериваємо виконання, щоб повідомлення з адмін-чату не йшло далі в "forward to admin"
         return res.status(200).end();
     }
 
-    // Any other message — forward to admin group with context
+    // Будь-яке інше повідомлення (з приватного чату користувача) — пересилаємо в адмін-групу
     if (ADMIN_CHAT_ID) {
         const username = message.from?.username ? `@${esc(message.from.username)}` : '—';
         const forwardText =
@@ -237,6 +241,7 @@ export default async function handler(req, res) {
             `👤 ${esc(name)} (${username})\n` +
             `🆔 \`${chatId}\`\n\n` +
             `💬 ${esc(text)}`;
+        
         await send(ADMIN_CHAT_ID, forwardText);
 
         await send(chatId,
