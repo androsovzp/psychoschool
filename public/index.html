@@ -13,7 +13,7 @@
 
     <!-- SEO Core -->
     <meta name="description"
-        content="Авторський 6-місячний курс психологічного консультування онлайн. Від теорії до впевненої приватної практики. Старт 22 квітня. ШІ-тренажер + сертифікат.">
+        content="Авторський 6-місячний курс психологічного консультування онлайн. Від теорії до впевненої приватної практики. Старт 29 квітня. ШІ-тренажер + сертифікат.">
     <link rel="canonical" href="https://psycho-school.vercel.app/">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Валерій Андросов">
@@ -24,7 +24,7 @@
     <meta property="og:url" content="https://psycho-school.vercel.app/">
     <meta property="og:title" content="Школа психологічного консультування | Авторський курс">
     <meta property="og:description"
-        content="6 місяців інтенсиву — від основ до приватної практики. Zoom, записи, ШІ-тренажер, сертифікат. Старт 22 квітня.">
+        content="6 місяців інтенсиву — від основ до приватної практики. Zoom, записи, ШІ-тренажер, сертифікат. Старт 29 квітня.">
     <meta property="og:image" content="https://psycho-school.vercel.app/cover.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -34,7 +34,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Школа психологічного консультування | Авторський курс">
     <meta name="twitter:description"
-        content="6 місяців інтенсиву — від основ до приватної практики. Zoom, записи, ШІ-тренажер, сертифікат. Старт 22 квітня.">
+        content="6 місяців інтенсиву — від основ до приватної практики. Zoom, записи, ШІ-тренажер, сертифікат. Старт 29 квітня.">
     <meta name="twitter:image" content="https://psycho-school.vercel.app/cover.png">
 
     <style>
@@ -168,7 +168,8 @@
 
         #chat-viewport {
             scroll-behavior: smooth;
-            height: 420px; /* Increased to accommodate content comfortably */
+            height: 420px;
+            /* Increased to accommodate content comfortably */
             display: flex;
             flex-direction: column;
         }
@@ -181,7 +182,8 @@
 
         #ai-typing {
             transition: opacity 0.2s ease;
-            min-height: 44px; /* Reserved space */
+            min-height: 44px;
+            /* Reserved space */
             display: flex;
             align-items: center;
         }
@@ -498,7 +500,7 @@
 
                 <!-- Countdown timer -->
                 <div class="bg-black text-white rounded-2xl px-6 py-4 inline-flex items-center gap-6 flex-wrap">
-                    <div class="text-xs font-bold uppercase tracking-widest text-gray-400">Старт 22 квітня:</div>
+                    <div class="text-xs font-bold uppercase tracking-widest text-gray-400">Старт 29 квітня:</div>
                     <div class="flex items-center gap-3" id="countdown">
                         <div class="text-center">
                             <div class="text-2xl font-black text-yellow-brand" id="countdown-days">--</div>
@@ -671,7 +673,7 @@
                 <div class="bg-black text-white rounded-3xl p-8">
                     <div class="w-14 h-14 bg-yellow-brand rounded-2xl flex items-center justify-center text-2xl mb-6">📅
                     </div>
-                    <h3 class="text-xl font-black mb-3 text-white">Старт 22 квітня</h3>
+                    <h3 class="text-xl font-black mb-3 text-white">Старт 29 квітня</h3>
                     <p class="text-gray-400">Набір закривається після заповнення 20 місць. Наразі реєстрація відкрита.
                     </p>
                     <a href="#register"
@@ -884,7 +886,7 @@
                 <div
                     class="inline-flex items-center gap-2 bg-red-50 border-2 border-red-200 text-red-700 px-6 py-3 rounded-2xl font-bold">
                     <span class="text-lg">🔴</span>
-                    Відкрито реєстрацію — до 20 місць у групі. Старт 22 квітня.
+                    Відкрито реєстрацію — до 20 місць у групі. Старт 29 квітня.
                 </div>
             </div>
             <div class="grid md:grid-cols-2 gap-8 items-stretch max-w-4xl mx-auto">
@@ -1293,9 +1295,9 @@
 
                 if (isAI) {
                     // show typing indicator
-                    setTimeout(() => { 
-                        typing.classList.remove('opacity-0'); 
-                        vp.scrollTop = vp.scrollHeight; 
+                    setTimeout(() => {
+                        typing.classList.remove('opacity-0');
+                        vp.scrollTop = vp.scrollHeight;
                     }, delay);
                     delay += typingDelay(msg.text);
                 }
@@ -1797,29 +1799,29 @@
 
     <script>
         // ─── Input Masks ─────────────────────────────────────────────────────────
-        (function() {
+        (function () {
             // -- Phone Mask (+380 (XX) XXX XX XX) --
             const phoneInputs = document.querySelectorAll('input[type="tel"]');
             phoneInputs.forEach(input => {
                 input.addEventListener('input', (e) => {
                     let cursorPosition = e.target.selectionStart;
                     let oldLength = e.target.value.length;
-                    
+
                     let x = e.target.value.replace(/\D/g, '');
                     // Ensure it starts with 380
                     if (x.length > 0 && !x.startsWith('380')) {
                         x = '380' + x;
                     }
-                    
+
                     let formatted = '+';
                     if (x.length > 0) formatted += x.substring(0, 3);
                     if (x.length > 3) formatted += ' (' + x.substring(3, 5);
                     if (x.length > 5) formatted += ') ' + x.substring(5, 8);
                     if (x.length > 8) formatted += ' ' + x.substring(8, 10);
                     if (x.length > 10) formatted += ' ' + x.substring(10, 12);
-                    
+
                     e.target.value = formatted.substring(0, 19);
-                    
+
                     // Adjust cursor position if needed
                     let newLength = e.target.value.length;
                     cursorPosition = cursorPosition + (newLength - oldLength);
