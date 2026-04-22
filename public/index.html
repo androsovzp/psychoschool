@@ -623,6 +623,94 @@
         </div>
     </section>
 
+    <!-- ═══════════════════════════════ LEGAL BASIS ═══════════════════════════════ -->
+    <section class="py-20 px-6 md:px-12 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto">
+
+            <!-- Header -->
+            <div class="flex items-center gap-4 mb-12">
+                <div class="text-4xl shrink-0">⚖️</div>
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-black">Правова основа та вимоги до участі</h2>
+                    <p class="text-gray-400 mt-1">Ми дбаємо про стандарти галузі — тому чесно говоримо про межі компетентностей</p>
+                </div>
+            </div>
+
+            <!-- Two columns -->
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <!-- Left: who -->
+                <div class="bg-gray-800 rounded-3xl p-8">
+                    <h3 class="text-lg font-black uppercase tracking-wider text-yellow-brand mb-6">Курс призначений для</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <span class="text-yellow-brand font-black text-lg shrink-0 mt-0.5">✓</span>
+                            <div>
+                                <span class="font-bold">Лікарів-психіатрів</span>
+                                <p class="text-gray-400 text-sm mt-0.5">Спеціальність «Психіатрія» (МОЗ України)</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-yellow-brand font-black text-lg shrink-0 mt-0.5">✓</span>
+                            <div>
+                                <span class="font-bold">Психотерапевтів</span>
+                                <p class="text-gray-400 text-sm mt-0.5">Згідно з Наказом МОЗ №958 від 26.05.2023</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-yellow-brand font-black text-lg shrink-0 mt-0.5">✓</span>
+                            <div>
+                                <span class="font-bold">Психологів</span>
+                                <p class="text-gray-400 text-sm mt-0.5">Спеціальність 053 «Психологія», ступінь не нижче бакалавра</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-yellow-brand font-black text-lg shrink-0 mt-0.5">✓</span>
+                            <div>
+                                <span class="font-bold">Студентів вищезазначених спеціальностей</span>
+                                <p class="text-gray-400 text-sm mt-0.5">Починайте набувати практичних навичок ще під час навчання</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Right: disclaimer -->
+                <div class="bg-gray-800 rounded-3xl p-8 flex flex-col">
+                    <h3 class="text-lg font-black uppercase tracking-wider text-gray-400 mb-6">Важливо знати</h3>
+                    <div class="space-y-4 flex-1">
+                        <div class="flex items-start gap-3">
+                            <span class="text-2xl shrink-0">📋</span>
+                            <p class="text-gray-300 leading-relaxed">
+                                <strong class="text-white">Цей курс не надає права на консультативну діяльність</strong> в Україні. Жоден приватний курс чи сертифікат — незалежно від тривалості — не замінює диплом державного зразка.
+                            </p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-2xl shrink-0">🏛️</span>
+                            <p class="text-gray-300 leading-relaxed">
+                                Відповідно до <strong class="text-white">Закону України №4223-IX</strong> «Про систему охорони психічного здоров'я» (2025), право на психологічне консультування мають лише фахівці з відповідним дипломом державного зразка.
+                            </p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-2xl shrink-0">💡</span>
+                            <p class="text-gray-300 leading-relaxed">
+                                Курс є <strong class="text-white">поглибленням практичних навичок</strong> для тих, хто вже має або здобуває відповідну освіту — і хоче впевнено почати або розвинути приватну практику.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- CTA -->
+                    <div class="mt-6 pt-6 border-t border-gray-700">
+                        <p class="text-gray-400 text-sm mb-3">Не впевнені, чи підходить курс у вашому випадку?</p>
+                        <button type="button" onclick="openQuestionModal()"
+                            class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-colors">
+                            💬 Задати питання тренеру
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ═══════════════════════════════ FORMAT ═══════════════════════════════ -->
     <section class="py-24 px-6 md:px-12 bg-gray-50">
         <div class="max-w-7xl mx-auto">
@@ -720,7 +808,8 @@
                 <div class="flex flex-wrap gap-3">
                     <span class="bg-yellow-brand px-4 py-2 rounded-full text-sm font-bold">Практикуючий психолог</span>
                     <span class="bg-gray-100 px-4 py-2 rounded-full text-sm font-semibold">Інтегративний підхід</span>
-                    <span class="bg-gray-100 px-4 py-2 rounded-full text-sm font-semibold">10 років практики</span>
+                    <span class="bg-gray-100 px-4 py-2 rounded-full text-sm font-semibold">Діючий член Української
+                        Спілки Психотерапевтів</span>
                     <span class="bg-gray-100 px-4 py-2 rounded-full text-sm font-semibold">Керівник МЦ "Mental
                         Clinic"</span>
                 </div>
