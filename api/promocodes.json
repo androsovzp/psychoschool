@@ -18,5 +18,10 @@
     "discount": 2000,
     "referrer": "Саша Дудник",
     "active": true
+  },
+  "NTU-HPI": {
+    "discount": 30000,
+    "referrer": "НТУ ХПІ",
+    "active": true
   }
 }
